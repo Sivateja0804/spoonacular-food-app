@@ -1,30 +1,36 @@
-from app.restAPI import Requests
-from app.parseJson import *
+from controller.rest_controller import Requests
+from utlis.json_parser import *
 
 
 def parse_shopping_list(shopping_list):
     shopping_items = []
     aisle = []
     amount = 0.0
-    for missed_object in shopping_list:
-        for missingItem in missed_object:
-            shopping_items.append(missingItem["name"])
-            aisle.append(missingItem["aisle"])
-            amount += missingItem["amount"]
+    try:
+        for missed_object in shopping_list:
+            for missingItem in missed_object:
+                shopping_items.append(missingItem["name"])
+                aisle.append(missingItem["aisle"])
+                amount += missingItem["amount"]
+    except LookupError:
+        print("Error: Could not about to find the ingredient name, aisle or amount")
     return shopping_items, aisle, amount
 
 
 def show_shopping_list(shopping_list):
-    shopping_items, aisle, amount = parse_shopping_list(shopping_list)
-    shopping_items = set(shopping_items)
-    shopping_items_string = ",".join(shopping_items)
-    print("Shopping Items List: ")
-    print(shopping_items_string)
-    aisle = set(aisle)
-    aisle_string = ",".join(aisle)
-    print("Visit below Aisles: ")
-    print(aisle_string)
-    print("Total Amount: " + str(amount))
+    try:
+        shopping_items, aisle, amount = parse_shopping_list(shopping_list)
+        shopping_items = set(shopping_items)
+        shopping_items_string = ",".join(shopping_items)
+        print("Shopping Items List: ")
+        print(shopping_items_string)
+        aisle = set(aisle)
+        aisle_string = ",".join(aisle)
+        print("Visit below Aisles: ")
+        print(aisle_string)
+        print("Total Amount: " + str(amount))
+    except Exception:
+        print("Error: Check your shopping list properly")
 
 
 class Recipes:
@@ -32,25 +38,16 @@ class Recipes:
         self.req = Requests()
 
     def get_ingredients(self):
-        # todo handle exceptions properly
-        # todo clean the input data
         try:
             print("Please type the ingredients with comma separated (ex: apple, banana, Mango) to search for recipes")
             ingredients = input("Enter here: ")
             ingredients = ingredients.split(",")
             for i in range(len(ingredients)):
                 ingredients[i] = ingredients[i].strip()
-        except:
+        except ValueError:
             print("Please type in the correct format")
             ingredients = self.get_ingredients()
         return ingredients
-
-    def search_new_recipe(self, title, exclude_cuisine, req):
-        exclude_cuisine.append(title)
-        ingredients = self.get_ingredients()
-        used_object, missed_object, unused_object, title, = req.get_and_show_one_recipe_complexsearch(ingredients,
-                                                                                                      number=1)
-        return used_object, missed_object, unused_object, title, exclude_cuisine
 
     def get_input_yes_no(self):
         try:
@@ -58,7 +55,7 @@ class Recipes:
             if response not in ["1", "2"]:
                 print("Please type the input in correct format ex: 1 or 2")
                 response = self.get_input_yes_no()
-        except:
+        except ValueError:
             print("Please type the input in correct format ex: 1 or 2")
             response = self.get_input_yes_no()
         return response
@@ -66,6 +63,9 @@ class Recipes:
     def get_recipes(self):
         ingredients = self.get_ingredients()
         total_data = self.req.get_requests(ingredients, number=100)
+        if total_data is None:
+            print("We're so sorry, something went wrong. Please check later.")
+            return
         if not total_data:
             print("There are no recipe with this ingredient. Please use proper ingredients: ex: apple, banana, etc")
             return self.get_recipes()
