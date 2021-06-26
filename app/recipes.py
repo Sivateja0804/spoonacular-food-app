@@ -1,10 +1,34 @@
 from app.restAPI import Requests
-from app.parseJson import JsonParser
+from app.parseJson import *
+
+
+def parse_shopping_list(shopping_list):
+    shopping_items = []
+    aisle = []
+    amount = 0.0
+    for missed_object in shopping_list:
+        for missingItem in missed_object:
+            shopping_items.append(missingItem["name"])
+            aisle.append(missingItem["aisle"])
+            amount += missingItem["amount"]
+    return shopping_items, aisle, amount
+
+
+def show_shopping_list(shopping_list):
+    shopping_items, aisle, amount = parse_shopping_list(shopping_list)
+    shopping_items = set(shopping_items)
+    shopping_items_string = ",".join(shopping_items)
+    print("Shopping Items List: ")
+    print(shopping_items_string)
+    aisle = set(aisle)
+    aisle_string = ",".join(aisle)
+    print("Visit below Aisles: ")
+    print(aisle_string)
+    print("Total Amount: " + str(amount))
 
 
 class Recipes:
     def __init__(self):
-        self.json=JsonParser()
         self.req = Requests()
 
     def get_ingredients(self):
@@ -28,29 +52,6 @@ class Recipes:
                                                                                                       number=1)
         return used_object, missed_object, unused_object, title, exclude_cuisine
 
-    def parse_shopping_list(self, shopping_list):
-        shopping_items = []
-        aisle = []
-        amount = 0.0
-        for missed_object in shopping_list:
-            for missingItem in missed_object:
-                shopping_items.append(missingItem["name"])
-                aisle.append(missingItem["aisle"])
-                amount += missingItem["amount"]
-        return shopping_items, aisle, amount
-
-    def show_shopping_list(self, shopping_list):
-        shopping_items, aisle, amount = self.parse_shopping_list(shopping_list)
-        shopping_items = set(shopping_items)
-        shopping_items_string = ",".join(shopping_items)
-        print("Shopping Items List: ")
-        print(shopping_items_string)
-        aisle = set(aisle)
-        aisle_string = ",".join(aisle)
-        print("Visit below Aisles: ")
-        print(aisle_string)
-        print("Total Amount: " + str(amount))
-
     def get_input_yes_no(self):
         try:
             response = input("Enter 1 for Yes and 2 for No:")
@@ -62,18 +63,18 @@ class Recipes:
             response = self.get_input_yes_no()
         return response
 
-    def get_receipes(self):
+    def get_recipes(self):
         ingredients = self.get_ingredients()
         total_data = self.req.get_requests(ingredients, number=100)
         if not total_data:
             print("There are no recipe with this ingredient. Please use proper ingredients: ex: apple, banana, etc")
-            return self.get_receipes()
+            return self.get_recipes()
         shopping_list = []
         index = 0
         n = len(total_data)
         while index < n:
             print("-------------------------------------------------------------------------")
-            used_object, missed_object, title = self.json.show_one_recipe_by_index(total_data, index)
+            used_object, missed_object, title = show_one_recipe_by_index(total_data, index)
             index += 1
             print("Do you like the recipe?")
             response = self.get_input_yes_no()
@@ -91,6 +92,6 @@ class Recipes:
                 print("We are sorry that you didn't like our recipe. We are showing you a new recipe")
                 continue
         if shopping_list:
-            self.show_shopping_list(shopping_list)
+            show_shopping_list(shopping_list)
         else:
             print("There are no Items to Shop")
