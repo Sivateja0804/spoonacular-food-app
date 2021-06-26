@@ -1,5 +1,5 @@
-from restAPI import Requests
-from parseJson import JsonParser
+from app.restAPI import Requests
+from app.parseJson import JsonParser
 
 
 class Recipes:
