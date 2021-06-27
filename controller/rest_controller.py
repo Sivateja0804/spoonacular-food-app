@@ -1,10 +1,12 @@
 import requests
-
+import os
+from dotenv import load_dotenv
 
 class Requests:
     def __init__(self):
+        load_dotenv()
         self.findByIngredientsURl = "https://api.spoonacular.com/recipes/findByIngredients"
-        self.apiKey = "306223d5987944d18b62f529be3a363d"
+        self.apiKey = os.getenv('API_KEY')
 
     # get requests by ingredients input=ingredients,number output=Json data with recipes
     def get_requests(self, ingredients, number=10):
