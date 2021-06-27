@@ -6,14 +6,11 @@ def parse_shopping_list(shopping_list):
     shopping_items = []
     aisle = []
     amount = 0.0
-    try:
-        for missed_object in shopping_list:
-            for missingItem in missed_object:
-                shopping_items.append(missingItem["name"])
-                aisle.append(missingItem["aisle"])
-                amount += missingItem["amount"]
-    except LookupError:
-        print("Error: Could not about to find the ingredient name, aisle or amount")
+    for missed_object in shopping_list:
+        for missingItem in missed_object:
+            shopping_items.append(missingItem["name"])
+            aisle.append(missingItem["aisle"])
+            amount += missingItem["amount"]
     return shopping_items, aisle, amount
 
 
@@ -30,7 +27,7 @@ def show_shopping_list(shopping_list):
         print(aisle_string)
         print("Total Amount: " + str(amount))
     except Exception:
-        print("Error: Check your shopping list properly")
+        print("Sorry, Unable to show shopping list.")
 
 
 class Recipes:
@@ -76,13 +73,15 @@ class Recipes:
             print("-------------------------------------------------------------------------")
             used_object, missed_object, title = show_one_recipe_by_index(total_data, index)
             index += 1
+            if used_object is None or title is None:
+                continue
             print("Do you like the recipe?")
             response = self.get_input_yes_no()
             if response == "1":
-                print(
-                    "\nIt's great that you liked the recipe! The missing items have been added to your shopping list\n")
-                print("Do you want to search for more recipes?")
-                shopping_list.append(missed_object)
+                print("\nIt's great that you liked the recipe! The missing items have been added to your shopping "
+                      "list.\nDo you want to search for more recipes?\n")
+                if missed_object:
+                    shopping_list.append(missed_object)
                 more_recipes = self.get_input_yes_no()
                 if more_recipes == "2":
                     break
@@ -91,7 +90,9 @@ class Recipes:
             elif response == "2":
                 print("We are sorry that you didn't like our recipe. We are showing you a new recipe")
                 continue
+        if index >= n:
+            print("Sorry there are no more recipes to show")
         if shopping_list:
             show_shopping_list(shopping_list)
         else:
-            print("There are no Items to Shop")
+            print("Shopping list is empty")
