@@ -26,14 +26,15 @@ def show_recipes(ingredients, action, ingredient_object, print_message):
 
 def show_one_recipe_by_index(total_data, i):
     used_object, missed_object, title = None, None, None
-    try:
-        data = total_data[i]
-        title = data["title"]
-        print("Recipe: " + title)
-        used_ingredients = data["usedIngredients"]
-        missed_ingredients = data["missedIngredients"]
-        used_object = show_recipes(used_ingredients, "used", [], "Used Ingredients: ")
-        missed_object = show_recipes(missed_ingredients, "missed", [], "Missing Ingredients you need to shop: ")
-    except Exception:
-        pass
+    if total_data and 0 <= i < len(total_data):
+        try:
+            data = total_data[i]
+            title = data["title"]
+            print("Recipe: " + title)
+            used_ingredients = data["usedIngredients"]
+            missed_ingredients = data["missedIngredients"]
+            used_object = show_recipes(used_ingredients, "used", [], "Used Ingredients: ")
+            missed_object = show_recipes(missed_ingredients, "missed", [], "Missing Ingredients you need to shop: ")
+        except Exception:
+            pass
     return used_object, missed_object, title
