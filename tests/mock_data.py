@@ -62,9 +62,33 @@ valid_json_response = [{"id": 665469, "title": "Xocai Healthy Chocolate Peanut B
                              "meta": ["frozen", "cut in chunks"], "extendedName": "frozen bananas",
                              "image": "https://spoonacular.com/cdn/ingredients_100x100/bananas.jpg"}],
                         "unusedIngredients": [], "likes": 1}]
-function_response = [[{'aisle': 'Produce', 'amount': 1.0, 'name': 'bananas'}],
-            [{'aisle': 'Sweet Snacks', 'amount': 1.0, 'name': 'chocolate'},
-             {'aisle': 'Nut butters, Jams, and Honey',
-              'amount': 1.0,
-              'name': 'peanut butter'}],
-            'Xocai Healthy Chocolate Peanut Butter Bannana Dip']
+
+function_response_index_0 = [[{'aisle': 'Produce', 'amount': 1.0, 'name': 'bananas'}],
+                             [{'aisle': 'Sweet Snacks', 'amount': 1.0, 'name': 'chocolate'},
+                              {'aisle': 'Nut butters, Jams, and Honey',
+                               'amount': 1.0,
+                               'name': 'peanut butter'}],
+                             'Xocai Healthy Chocolate Peanut Butter Bannana Dip']
+
+function_response_index_1 = [[{'aisle': 'Produce', 'amount': 2.0, 'name': 'bananas'}],
+                             [{'aisle': 'Beverages', 'amount': 0.5, 'name': 'orange juice'},
+                              {'aisle': 'Spices and Seasonings', 'amount': 1.0, 'name': 'cardamom powder'}],
+                             'Luscious Orange Cardamom Smoothie']
+
+missed_object_0 = function_response_index_0[1]
+missed_object_1 = function_response_index_1[1]
+
+empty_shopping_list_response = ([], [], 0.0)
+
+shopping_list_1 = [missed_object_0]
+parse_shopping_list_1_response = (['chocolate', 'peanut butter'],
+                                  ['Sweet Snacks', 'Nut butters, Jams, and Honey'],
+                                  2.0)
+
+shopping_list_2 = [missed_object_0, missed_object_1]
+parse_shopping_list_2_response = (['chocolate', 'peanut butter', 'orange juice', 'cardamom powder'],
+                                  ['Sweet Snacks',
+                                   'Nut butters, Jams, and Honey',
+                                   'Beverages',
+                                   'Spices and Seasonings'],
+                                  3.5)

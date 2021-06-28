@@ -31,6 +31,10 @@ def show_shopping_list(shopping_list):
         print("Sorry, Unable to show shopping list.")
 
 
+def check_and_assign_ingredient_number(ingredient_number=INGREDIENTS_NUMBER):
+    return min(max(1, ingredient_number), 100)
+
+
 class Recipes:
     def __init__(self):
         self.req = Requests()
@@ -58,43 +62,52 @@ class Recipes:
             response = self.get_input_yes_no()
         return response
 
-    def get_recipes(self):
-        ingredients = self.get_ingredients()
-        ingredients_number = min(max(1, INGREDIENTS_NUMBER), 100)
-        total_data = self.req.get_requests(ingredients, number=ingredients_number)
+    def check_total_data_response(self, total_data):
         if total_data is None:
             print("We're so sorry, something went wrong. Please check later.")
-            return
+            return total_data
         if not total_data:
             print("There are no recipe with this ingredient. Please use proper ingredients: ex: apple, banana, etc")
             return self.get_recipes()
-        shopping_list = []
-        index = 0
-        n = len(total_data)
-        while index < n:
-            print("-------------------------------------------------------------------------")
-            used_object, missed_object, title = show_one_recipe_by_index(total_data, index)
-            index += 1
-            if used_object is None or title is None:
-                continue
-            print("Do you like the recipe?")
-            response = self.get_input_yes_no()
-            if response == "1":
-                print("\nIt's great that you liked the recipe! The missing items have been added to your shopping "
-                      "list.\nDo you want to search for more recipes?\n")
-                if missed_object:
-                    shopping_list.append(missed_object)
-                more_recipes = self.get_input_yes_no()
-                if more_recipes == "2":
-                    break
-                elif more_recipes == "1":
+
+    def validate_data_and_add_items_to_shopping_cart(self, total_data):
+        if total_data:
+            shopping_list = []
+            index = 0
+            n = len(total_data)
+            while index < n:
+                print("-------------------------------------------------------------------------")
+                used_object, missed_object, title = show_one_recipe_by_index(total_data, index)
+                index += 1
+                if used_object is None or title is None:
                     continue
-            elif response == "2":
-                print("We are sorry that you didn't like our recipe. We are showing you a new recipe")
-                continue
-        if index >= n:
-            print("Sorry there are no more recipes to show")
-        if shopping_list:
-            show_shopping_list(shopping_list)
+                print("Do you like the recipe?")
+                response = self.get_input_yes_no()
+                if response == "1":
+                    print("\nIt's great that you liked the recipe! The missing items have been added to your shopping "
+                          "list.\nDo you want to search for more recipes?\n")
+                    if missed_object:
+                        shopping_list.append(missed_object)
+                    else:
+                        print("There are no items to add to shopping cart")
+                    more_recipes = self.get_input_yes_no()
+                    if more_recipes == "2":
+                        break
+                    elif more_recipes == "1":
+                        continue
+                elif response == "2":
+                    print("We are sorry that you didn't like our recipe. We are showing you a new recipe")
+                    continue
+            if index >= n:
+                print("Sorry there are no more recipes to show")
+            if shopping_list:
+                show_shopping_list(shopping_list)
+            else:
+                print("Shopping list is empty")
         else:
-            print("Shopping list is empty")
+            self.check_total_data_response(self, total_data)
+
+    def get_recipes(self):
+        ingredients = self.get_ingredients()
+        total_data = self.req.get_requests(ingredients, number=check_and_assign_ingredient_number())
+        self.validate_data_and_add_items_to_shopping_cart(total_data)
