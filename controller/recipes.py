@@ -79,17 +79,19 @@ class Recipes:
                 print("-------------------------------------------------------------------------")
                 used_object, missed_object, title = show_one_recipe_by_index(total_data, index)
                 index += 1
-                if used_object is None or title is None:
+                if used_object is None or title is None or missed_object is None:
                     continue
-                print("Do you like the recipe?")
+                print("Do you like the recipe?\n")
                 response = self.get_input_yes_no()
                 if response == "1":
-                    print("\nIt's great that you liked the recipe! The missing items have been added to your shopping "
-                          "list.\nDo you want to search for more recipes?\n")
                     if missed_object:
+                        print(
+                            "It's great that you liked the recipe! The missing items have been added to your shopping "
+                            "list.\nDo you want to search for more recipes?\n")
                         shopping_list.append(missed_object)
                     else:
-                        print("There are no items to add to shopping cart")
+                        print("There are no items to add to shopping cart. Do you want to search for more recipes?\n")
+
                     more_recipes = self.get_input_yes_no()
                     if more_recipes == "2":
                         break
@@ -105,7 +107,7 @@ class Recipes:
             else:
                 print("Shopping list is empty")
         else:
-            self.check_total_data_response(self, total_data)
+            self.check_total_data_response(total_data)
 
     def get_recipes(self):
         ingredients = self.get_ingredients()
