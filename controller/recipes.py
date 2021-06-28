@@ -1,5 +1,6 @@
 from controller.rest_controller import Requests
-from utlis.json_parser import *
+from utils.json_parser import *
+from utils.app_constants import *
 
 
 def parse_shopping_list(shopping_list):
@@ -59,7 +60,8 @@ class Recipes:
 
     def get_recipes(self):
         ingredients = self.get_ingredients()
-        total_data = self.req.get_requests(ingredients, number=100)
+        ingredients_number = min(max(1, INGREDIENTS_NUMBER), 100)
+        total_data = self.req.get_requests(ingredients, number=ingredients_number)
         if total_data is None:
             print("We're so sorry, something went wrong. Please check later.")
             return
