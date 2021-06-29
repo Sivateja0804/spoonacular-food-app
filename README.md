@@ -57,7 +57,7 @@ Step-2. Users will able to provide the ingredients (comma-separated) via a comma
 
 Step-3. The application will fetch one recipe featuring used ingredients as well as missing ingredients required for that particular dish. At this point, the user will receive an option to either like the displayed recipe or go for a new one.
 
-![Step-3](/screenshots/Step3.png | width=70)
+![Step-3](/screenshots/Step3.png =100x20)
 
 Step-4. If the user doesn't like the recipe then the application will repeat step 3 and so on.
 
