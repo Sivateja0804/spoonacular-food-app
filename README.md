@@ -80,6 +80,6 @@ Step-6. If the user decided not to view more recipes, then the application will 
     2. Provided env.example file in the git repository which explains to users how to create and use their respective API key
 - Test cases and development  
      1. The project is being built in stages, with the overall functionality being broken down into smaller modules and milestones. The modules that have been created are being added to and improved over time. Throughout the project's development, a test-driven development approach is used. The test-driven development approach has numerous advantages, including improved code quality, flexible and easy code, easy refactoring, and up-to-date documentation. Using this method, we first write unit test cases, then develop the code and ensure that it passes the test cases, refactor the code, and run all of the test cases again. Throughout the development, these steps are repeated.
-     2. 31 Testcases were added to validate different functions that were written during code development with usecases.
+     2. Multiple Testcases were added to validate different functions that were written during code development with usecases.
      3. For functionality that needs command line inputs, manual testing is done and documented
 - Technical documentation is shared providing all the required information what each function and python modules do.    
