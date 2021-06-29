@@ -7,9 +7,9 @@ Parse the shopping list object which has all the missing ingredients and returns
 aisle lists and  the total amount.
 @param shopping_list {Object} - Object with all the missing ingredients objects
 
-@param shopping_items {Object} - list that stores all the missing ingredients names
-@param aisle {Object} - list that stores all the missing ingredients aisles
-@param amount {float} - total expected amount required to shop the missing ingredients
+@return shopping_items {Object} - list that stores all the missing ingredients names
+@return aisle {Object} - list that stores all the missing ingredients aisles
+@return amount {float} - total expected amount required to shop the missing ingredients
 '''
 def parse_shopping_list(shopping_list):
     shopping_items = []
@@ -52,9 +52,10 @@ def show_shopping_list(shopping_list):
 '''
 This function makes sures the ingredient number lies between 1-100
 @param RECIPES_NUMBER {Integer} - Its value is in app_constant.py file. The maximum number of recipes to return
+@return {Integer}- ranges from 1-100 inclusive
 '''
-def check_and_assign_ingredient_number(ingredient_number=RECIPES_NUMBER):
-    return min(max(1, ingredient_number), 100)
+def restrict_recipe_number(recipe_number=RECIPES_NUMBER):
+    return min(max(1, recipe_number), 100)
 
 
 class Recipes:
@@ -63,7 +64,7 @@ class Recipes:
 
     '''
     This function return ingredients list that were entered in the command line.
-    @param ingredients {Object} - List of ingredient names
+    @return ingredients {Object} - List of ingredient names
     '''
     def get_ingredients(self):
         try:
@@ -79,7 +80,7 @@ class Recipes:
 
     '''
         This function takes input 1 or 2 from terminal and return same response
-        @param response {String} - 1 for Yes and 2 for No
+        @return response {String} - 1 for Yes and 2 for No
     '''
     def get_input_yes_no(self):
         try:
@@ -153,5 +154,5 @@ class Recipes:
     all the main app logic and show the shopping list details to the user '''
     def get_recipes(self):
         ingredients = self.get_ingredients()
-        total_data = self.req.get_requests(ingredients, number=check_and_assign_ingredient_number())
+        total_data = self.req.get_requests(ingredients, number=restrict_recipe_number())
         self.validate_data_and_add_items_to_shopping_cart(total_data)

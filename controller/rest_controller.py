@@ -15,7 +15,7 @@ class Requests:
     @param ingredients {Object} - Object with all the user entered ingredients 
     @param number {Integer} - The maximum number of recipes to return
     
-    @param data {Object} - Json response which contains recipe data
+    @return data {Object} - Json response which contains recipe data.
     '''
     def get_requests(self, ingredients, number=10):
         try:

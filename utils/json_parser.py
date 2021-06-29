@@ -5,6 +5,8 @@ take ingredients and show missed ingredients, aisle, amount if the action is mis
 @param action {String} - used or missed
 @param ingredient_object {Object} - empty list to store the ingredient details
 @param print_message {String} - Message to show what action that is currently being performed
+
+@return ingredient_object {Object} - list with all the ingredient details.
 """
 def show_recipes(ingredients, action, ingredient_object, print_message):
     print_statement = []
@@ -37,9 +39,9 @@ find recipe object by index, parse it and return the used, missed and title
 @param total_data {Object} - complete Json response object with all the recipes details
 @param i {Integer} - index to get the recipe
 
-@param used_object {Object} - Used ingredient details
-@param missed_object {Object} - Missing ingredient item details
-@param title {String} - Name of the recipe
+@return used_object {Object} - Used ingredient details
+@return missed_object {Object} - Missing ingredient item details
+@return title {String} - Name of the recipe
 """
 def show_one_recipe_by_index(total_data, i):
     used_object, missed_object, title = None, None, None
