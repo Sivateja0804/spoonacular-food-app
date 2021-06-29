@@ -6,7 +6,6 @@
 ### [Installation Guide](#Installation_Guide)
 ### [Features and project walkthrough](#Features_and_project_walkthrough)
 ### [Design Decisions](#Design_Decisions)
-### [References](#References)
 
 ## Purpose:
 Python application to accept ingredients from the user and fetch the appropriate recipes using spoonacular food API.
@@ -53,28 +52,34 @@ Step-1. Run the main.py file using the following command via terminal
 
 Step-2. Users will able to provide the ingredients (comma-separated) via a command-line interface(CLI).
 
-![Step-2](screenshots/Step2.png)
+<img src="/screenshots/Step2.png" width="650">
 
 Step-3. The application will fetch one recipe featuring used ingredients as well as missing ingredients required for that particular dish. At this point, the user will receive an option to either like the displayed recipe or go for a new one.
 
-![Step-3](/screenshots/Step3.png =100x20)
+<img src="/screenshots/Step3.png" width="500">
 
 Step-4. If the user doesn't like the recipe then the application will repeat step 3 and so on.
 
-![Step-4](Step4.png)
+<img src="/screenshots/Step4.png" width="500">
 
 Step-5. If the user likes the recipe, the missing ingredients will be added to the shopping list, providing an option for viewing more recipes. If the user want to view more then goto step 3.
 
-![Step-5](Step5.png)
+<img src="/screenshots/Step5.png" width="500">
 
 Step-6. If the user decided not to view more recipes, then the application will display the final shopping list, which aisles the user needs to visit along with the estimated cost of the shopping lits.
 
-![Step-6](Step6.png)
+<img src="/screenshots/Step6.png" width="500">
 
 
 ## Design_Decisions:
+- Coding styles, coding standards were followed throughout the project development. All the modules, classes and functions are inline documented.
 - Data stored in the memory: 
-    1. As the data is limited and very small, I have stored data in memory rather than an external database.
+    1. As the data is limited and very small, I have stored data in memory variables rather than an external database.
 - Python-dotenv
     1. To secure the API key used, I have added the key to the env file which won't be uploaded to version control.
     2. Provided env.example file in the git repository which explains to users how to create and use their respective API key
+- Test cases and development  
+     1. The project is being built in stages, with the overall functionality being broken down into smaller modules and milestones. The modules that have been created are being added to and improved over time. Throughout the project's development, a test-driven development approach is used. The test-driven development approach has numerous advantages, including improved code quality, flexible and easy code, easy refactoring, and up-to-date documentation. Using this method, we first write unit test cases, then develop the code and ensure that it passes the test cases, refactor the code, and run all of the test cases again. Throughout the development, these steps are repeated.
+     2. 31 Testcases were added to validate different functions that were written during code development with usecases.
+     3. For functionality that needs command line inputs, manual testing is done and documented
+- Technical documentation is shared providing all the required information what each function and python modules do.    
