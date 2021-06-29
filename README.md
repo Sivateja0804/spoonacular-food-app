@@ -16,32 +16,60 @@ Python application to accept ingredients from the user and fetch the appropriate
 - Python programming language
 
 ## System_Requirements:
-1. Python 3.8 or above
-2. Requests 2.25.1
-3. Python-dotenv 0.18.0
+*Prerequisite: Needs Python 3.8 to be installed.* 
+1. Requests 2.25.1
+2. Python-dotenv 0.18.0
+3. Spoonacular API Key
+
+To install python 3.8 on Windows/Mac/Linux, go to Python official download page [here](https://www.python.org/downloads/release/python-380/). Download the executable and run the executable on the machine.
+
+To run the project on your machine, you need to follow the steps mentioned below in the installation guide. 
 
 ## Installation_Guide:
 Step-1. Clone the project Repo.
 
 Step-2. Unzip the downloaded folder.
 
-Step-3. Open the terminal and navigate to the project's root folder and run the following commands
+Step-3. Open the terminal and navigate to the project's root folder and run the following command
 
-pip3 install -r requirements.txt 
+```pip3 install -r requirements.txt```
+
+Step-4. Create an account on https://spoonacular.com/food-api
+
+Step-5. After you login to the account click on My Console->Profile->Show/Hide API Key and store the API Key safely
+
+Step-6. Create .env file(It should be in the root folder: spoonacular-food-app/) similar to env.example file that I created in this root folder and replace the dummy API Key value with your API Key Value.
+
+```API_KEY="xxxxxxxxxxxxxxxxxxxxxxxxxx"```
+
+*Note: Never push the .env file to your github repository. So make sure you mention the filename(*.env) in .gitignore file.
+
 
 
 ## Features_and_project_walkthrough:
-Step-1. Run th main.py file using the following command via terminal
+Step-1. Run the main.py file using the following command via terminal
 
-python3 main.py
+```python3 main.py```
 
 Step-2. Users will able to provide the ingredients (comma-separated) via a command-line interface(CLI).
 
-Step-3. The application will fetch one recipe featuring used ingredients as well as missing ingredients required for that particular dish.
+![Step-2](Step2.png)
 
-Step-4. At this point, the user will receive an option to either like the displayed recipe or go for a new one, If the user doesn't like the recipe then the application will repeat step 3 and so on, and if the user likes the recipe, the missing ingredients will be added to the shopping list, providing an option for viewing more recipes. If the user want to view more then goto step 3.;
+Step-3. The application will fetch one recipe featuring used ingredients as well as missing ingredients required for that particular dish. At this point, the user will receive an option to either like the displayed recipe or go for a new one.
 
-Step-5. If the user decided not to view more recipes, then the application will display the final shopping list, which aisles the user needs to visit along with the estimated cost of the shopping lits.
+![Step-3](Step3.png)
+
+Step-4. If the user doesn't like the recipe then the application will repeat step 3 and so on.
+
+![Step-4](Step4.png)
+
+Step-5. If the user likes the recipe, the missing ingredients will be added to the shopping list, providing an option for viewing more recipes. If the user want to view more then goto step 3.
+
+![Step-5](Step5.png)
+
+Step-6. If the user decided not to view more recipes, then the application will display the final shopping list, which aisles the user needs to visit along with the estimated cost of the shopping lits.
+
+![Step-6](Step6.png)
 
 
 ## Design_Decisions:
