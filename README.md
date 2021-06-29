@@ -1,7 +1,6 @@
 # Spoonacular Food API
 
 ### [Purpose](#Purpose)
-### [Major component](#Major_Component)
 ### [System Requirements](#System_Requirements)
 ### [Installation Guide](#Installation_Guide)
 ### [Features and project walkthrough](#Features_and_project_walkthrough)
@@ -10,10 +9,6 @@
 
 ## Purpose:
 Python application to accept ingredients from the user and fetch the appropriate recipes using spoonacular food API.
-
-## Major_Component:
-- Python Command Line Interface
-- Python programming language
 
 ## System_Requirements:
 *Prerequisite: Needs Python 3.8 to be installed.* 
@@ -26,9 +21,11 @@ To install python 3.8 on Windows/Mac/Linux, go to Python official download page 
 To run the project on your machine, you need to follow the steps mentioned below in the installation guide. 
 
 ## Installation_Guide:
-Step-1. Clone the project Repo.
+Step-1. Open terminal and goto the folder where you want to keep this project. 
 
-Step-2. Unzip the downloaded folder.
+Step-2. Clone the repository by typing the below command in the terminal
+
+```git clone https://github.com/Sivateja0804/spoonacular-food-app.git``` 
 
 Step-3. Open the terminal and navigate to the project's root folder and run the following command
 
@@ -38,18 +35,28 @@ Step-4. Create an account on https://spoonacular.com/food-api
 
 Step-5. After you login to the account click on My Console->Profile->Show/Hide API Key and store the API Key safely
 
-Step-6. Create .env file(It should be in the root folder: spoonacular-food-app/) similar to env.example file that I created in this root folder and replace the dummy API Key value with your API Key Value.
+Step-6. Create .env file(It should be in the root folder: spoonacular-food-app/) similar to env.example file that was created in this root folder and replace the dummy API Key value with your API Key Value.
 
 ```API_KEY="xxxxxxxxxxxxxxxxxxxxxxxxxx"```
 
 *Note: Never push the .env file to your github repository. So make sure you mention the filename(*.env) in .gitignore file.
 
+*steps to create .env file:*
 
+1) open notepad++ and paste the API key as shown above and then click file->save as-> ".env" make sure you use double quotes while typing the file name.
+
+2) you can also simply rename the env.example to .env and replace your API key
+
+3) make sure its a .env file but not other extensions (for ex: .env.txt) otherwise you will get unauthorized Url exception 
 
 ## Features_and_project_walkthrough:
 Step-1. Run the main.py file using the following command via terminal
 
-```python3 main.py```
+```python3 main.py``` .
+
+if your python is already pointing to 3.x version then you can directly run 
+
+```python main.py```
 
 Step-2. Users will able to provide the ingredients (comma-separated) via a command-line interface(CLI).
 
@@ -59,7 +66,7 @@ Step-3. The application will fetch one recipe featuring used ingredients as well
 
 <img src="/screenshots/Step3.png" width="500">
 
-Step-4. If the user doesn't like the recipe then the application will repeat step 3 and so on.
+Step-4. If the user doesn't like the recipe then the application will go to step 3.
 
 <img src="/screenshots/Step4.png" width="500">
 
@@ -90,5 +97,9 @@ Step-6. If the user decided not to view more recipes, then the application will 
 To run the test_suite go to tests folder and run the below command:
 
 ``` python3 test_suite.py```
+
+if your python is already pointing to 3.x version then you can directly run 
+
+``` python test_suite.py```
 
 
