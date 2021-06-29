@@ -82,15 +82,15 @@ class Recipes:
         This function takes input 1 or 2 from terminal and return same response
         @return response {String} - 1 for Yes and 2 for No
     '''
-    def get_input_yes_no(self):
+    def validate_user_input(self):
         try:
             response = input("Enter 1 for Yes and 2 for No:")
             if response not in ["1", "2"]:
                 print("Please type the input in correct format ex: 1 or 2")
-                response = self.get_input_yes_no()
+                response = self.validate_user_input()
         except ValueError:
             print("Please type the input in correct format ex: 1 or 2")
-            response = self.get_input_yes_no()
+            response = self.validate_user_input()
         return response
 
     '''
@@ -111,7 +111,7 @@ class Recipes:
     recipe. It Repeat the process of showing new recipes to the user and adding the missing ingredients of “liked” 
     recipes until the user is satisfied with their shopping list and shows the shopping list at the end.
     @param total_data {Object} - complete Json response object with all the recipes details. '''
-    def validate_data_and_add_items_to_shopping_cart(self, total_data):
+    def validate_data_and_show_shopping_cart(self, total_data):
         if total_data:
             shopping_list = []
             index = 0
@@ -123,7 +123,7 @@ class Recipes:
                 if used_object is None or title is None or missed_object is None:
                     continue
                 print("Do you like the recipe?\n")
-                response = self.get_input_yes_no()
+                response = self.validate_user_input()
                 if response == "1":
                     if missed_object:
                         print(
@@ -133,7 +133,7 @@ class Recipes:
                     else:
                         print("There are no items to add to shopping cart. Do you want to search for more recipes?\n")
 
-                    more_recipes = self.get_input_yes_no()
+                    more_recipes = self.validate_user_input()
                     if more_recipes == "2":
                         break
                     elif more_recipes == "1":
@@ -155,4 +155,4 @@ class Recipes:
     def get_recipes(self):
         ingredients = self.get_ingredients()
         total_data = self.req.get_requests(ingredients, number=restrict_recipe_number())
-        self.validate_data_and_add_items_to_shopping_cart(total_data)
+        self.validate_data_and_show_shopping_cart(total_data)
