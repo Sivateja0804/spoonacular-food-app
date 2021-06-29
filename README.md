@@ -6,7 +6,6 @@
 ### [Installation Guide](#Installation_Guide)
 ### [Features and project walkthrough](#Features_and_project_walkthrough)
 ### [Design Decisions](#Design_Decisions)
-### [References](#References)
 
 ## Purpose:
 Python application to accept ingredients from the user and fetch the appropriate recipes using spoonacular food API.
@@ -53,7 +52,7 @@ Step-1. Run the main.py file using the following command via terminal
 
 Step-2. Users will able to provide the ingredients (comma-separated) via a command-line interface(CLI).
 
-<img src="/screenshots/Step2.png" width="300">
+<img src="/screenshots/Step2.png" width="650">
 
 Step-3. The application will fetch one recipe featuring used ingredients as well as missing ingredients required for that particular dish. At this point, the user will receive an option to either like the displayed recipe or go for a new one.
 
@@ -73,8 +72,14 @@ Step-6. If the user decided not to view more recipes, then the application will 
 
 
 ## Design_Decisions:
+- Coding styles, coding standards were followed throughout the project development. All the modules, classes and functions are inline documented.
 - Data stored in the memory: 
-    1. As the data is limited and very small, I have stored data in memory rather than an external database.
+    1. As the data is limited and very small, I have stored data in memory variables rather than an external database.
 - Python-dotenv
     1. To secure the API key used, I have added the key to the env file which won't be uploaded to version control.
     2. Provided env.example file in the git repository which explains to users how to create and use their respective API key
+- Test cases and development  
+     1. The project is being built in stages, with the overall functionality being broken down into smaller modules and milestones. The modules that have been created are being added to and improved over time. Throughout the project's development, a test-driven development approach is used. The test-driven development approach has numerous advantages, including improved code quality, flexible and easy code, easy refactoring, and up-to-date documentation. Using this method, we first write unit test cases, then develop the code and ensure that it passes the test cases, refactor the code, and run all of the test cases again. Throughout the development, these steps are repeated.
+     2. 31 Testcases were added to validate different functions that were written during code development with usecases.
+     3. For functionality that needs command line inputs, manual testing is done and documented
+- Technical documentation is shared providing all the required information what each function and python modules do.    
