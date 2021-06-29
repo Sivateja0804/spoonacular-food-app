@@ -6,6 +6,7 @@
 ### [Installation Guide](#Installation_Guide)
 ### [Features and project walkthrough](#Features_and_project_walkthrough)
 ### [Design Decisions](#Design_Decisions)
+### [Test Suite](#Test_Suite)
 
 ## Purpose:
 Python application to accept ingredients from the user and fetch the appropriate recipes using spoonacular food API.
@@ -82,4 +83,12 @@ Step-6. If the user decided not to view more recipes, then the application will 
      1. The project is being built in stages, with the overall functionality being broken down into smaller modules and milestones. The modules that have been created are being added to and improved over time. Throughout the project's development, a test-driven development approach is used. The test-driven development approach has numerous advantages, including improved code quality, flexible and easy code, easy refactoring, and up-to-date documentation. Using this method, we first write unit test cases, then develop the code and ensure that it passes the test cases, refactor the code, and run all of the test cases again. Throughout the development, these steps are repeated.
      2. Multiple Testcases were added to validate different functions that were written during code development with usecases.
      3. For functionality that needs command line inputs, manual testing is done and documented
-- Technical documentation is shared providing all the required information what each function and python modules do.    
+- Technical documentation is shared providing all the required information about each python module.   
+
+## Test_Suite:
+*Prerequisite: Make sure you have the correct Api key in the .env file otherwise you will see a lot of testcases failing because of unauthoraized url.* 
+To run the test_suite go to tests folder and run the below command:
+
+``` python3 test_suite.py```
+
+
