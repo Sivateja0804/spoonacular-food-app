@@ -53,23 +53,23 @@ Step-1. Run the main.py file using the following command via terminal
 
 Step-2. Users will able to provide the ingredients (comma-separated) via a command-line interface(CLI).
 
-![Step-2](screenshots/Step2.png)
+<img src="/screenshots/Step2.png" width="300">
 
 Step-3. The application will fetch one recipe featuring used ingredients as well as missing ingredients required for that particular dish. At this point, the user will receive an option to either like the displayed recipe or go for a new one.
 
-![Step-3](/screenshots/Step3.png =100x20)
+<img src="/screenshots/Step3.png" width="500">
 
 Step-4. If the user doesn't like the recipe then the application will repeat step 3 and so on.
 
-![Step-4](Step4.png)
+<img src="/screenshots/Step4.png" width="500">
 
 Step-5. If the user likes the recipe, the missing ingredients will be added to the shopping list, providing an option for viewing more recipes. If the user want to view more then goto step 3.
 
-![Step-5](Step5.png)
+<img src="/screenshots/Step5.png" width="500">
 
 Step-6. If the user decided not to view more recipes, then the application will display the final shopping list, which aisles the user needs to visit along with the estimated cost of the shopping lits.
 
-![Step-6](Step6.png)
+<img src="/screenshots/Step6.png" width="500">
 
 
 ## Design_Decisions:
