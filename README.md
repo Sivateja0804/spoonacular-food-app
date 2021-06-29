@@ -53,11 +53,11 @@ Step-1. Run the main.py file using the following command via terminal
 
 Step-2. Users will able to provide the ingredients (comma-separated) via a command-line interface(CLI).
 
-![Step-2](Step2.png)
+![Step-2](screenshots/Step2.png)
 
 Step-3. The application will fetch one recipe featuring used ingredients as well as missing ingredients required for that particular dish. At this point, the user will receive an option to either like the displayed recipe or go for a new one.
 
-![Step-3](Step3.png)
+![Step-3](/screenshots/Step3.png)
 
 Step-4. If the user doesn't like the recipe then the application will repeat step 3 and so on.
 
