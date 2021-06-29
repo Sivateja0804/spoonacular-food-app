@@ -10,7 +10,13 @@ class Requests:
         self.findByIngredientsURl = FIND_BY_INGREDIENTS_URL
         self.apiKey = os.getenv('API_KEY')
 
-    # get requests by ingredients input=ingredients,number output=Json data with recipes
+    '''
+    Use some of the supplied ingredients and requests the url to get the Recipe response
+    @param ingredients {Object} - Object with all the user entered ingredients 
+    @param number {Integer} - The maximum number of recipes to return
+    
+    @param data {Object} - Json response which contains recipe data
+    '''
     def get_requests(self, ingredients, number=10):
         try:
             params = {'ingredients': ingredients,

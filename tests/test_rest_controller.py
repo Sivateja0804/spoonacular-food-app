@@ -37,14 +37,6 @@ class TestingAPIResponse(unittest.TestCase):
         ingredients = [""]
         self.assertEqual(self.req.get_requests(ingredients, number=10), [])
 
-    def test_json_response_invalid_number_less_than_zero(self):
-        ingredients = ["banana","apple"]
-        self.assertEqual(len(self.req.get_requests(ingredients, number=-1)), 1)
-
-    def test_json_response_invalid_number_greater_than_zero(self):
-        ingredients = ["banana","apple"]
-        self.assertEqual(len(self.req.get_requests(ingredients, number=1000)), 100)
-
     def test_json_response_single_ingredient(self):
         ingredients = ["banana"]
         self.assertEqual(len(self.req.get_requests(ingredients, number=10)), 10)

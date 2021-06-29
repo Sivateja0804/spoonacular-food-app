@@ -2,7 +2,15 @@ from controller.rest_controller import Requests
 from utils.json_parser import *
 from utils.app_constants import *
 
+'''
+Parse the shopping list object which has all the missing ingredients and returns the shopping,
+aisle lists and  the total amount.
+@param shopping_list {Object} - Object with all the missing ingredients objects
 
+@param shopping_items {Object} - list that stores all the missing ingredients names
+@param aisle {Object} - list that stores all the missing ingredients aisles
+@param amount {float} - total expected amount required to shop the missing ingredients
+'''
 def parse_shopping_list(shopping_list):
     shopping_items = []
     aisle = []
@@ -15,12 +23,22 @@ def parse_shopping_list(shopping_list):
     return shopping_items, aisle, amount
 
 
+'''
+Parse shopping list and show the shopping items, aisles and total amount to user
+@param shopping_list {Object} - Object with all the missing ingredients objects
+'''
 def show_shopping_list(shopping_list):
     try:
         shopping_items, aisle, amount = parse_shopping_list(shopping_list)
-        shopping_items = set(shopping_items)
-        shopping_items_string = ",".join(shopping_items)
-        print("Shopping Items List: ")
+        shopping_items_dict = {}
+        for item in shopping_items:
+            shopping_items_dict[item] = shopping_items_dict.get(item, 0) + 1
+        shopping_items_string = ""
+        for item,count in shopping_items_dict.items():
+            shopping_items_string+=item+" :"+str(count)+", "
+        if shopping_items_string:
+            shopping_items_string=shopping_items_string[:-2]
+        print("Shopping Items List with quantity: ")
         print(shopping_items_string)
         aisle = set(aisle)
         aisle_string = ",".join(aisle)
@@ -31,7 +49,11 @@ def show_shopping_list(shopping_list):
         print("Sorry, Unable to show shopping list.")
 
 
-def check_and_assign_ingredient_number(ingredient_number=INGREDIENTS_NUMBER):
+'''
+This function makes sures the ingredient number lies between 1-100
+@param RECIPES_NUMBER {Integer} - Its value is in app_constant.py file. The maximum number of recipes to return
+'''
+def check_and_assign_ingredient_number(ingredient_number=RECIPES_NUMBER):
     return min(max(1, ingredient_number), 100)
 
 
@@ -39,6 +61,10 @@ class Recipes:
     def __init__(self):
         self.req = Requests()
 
+    '''
+    This function return ingredients list that were entered in the command line.
+    @param ingredients {Object} - List of ingredient names
+    '''
     def get_ingredients(self):
         try:
             print("Please type the ingredients with comma separated (ex: apple, banana, Mango) to search for recipes")
@@ -51,6 +77,10 @@ class Recipes:
             ingredients = self.get_ingredients()
         return ingredients
 
+    '''
+        This function takes input 1 or 2 from terminal and return same response
+        @param response {String} - 1 for Yes and 2 for No
+    '''
     def get_input_yes_no(self):
         try:
             response = input("Enter 1 for Yes and 2 for No:")
@@ -62,6 +92,11 @@ class Recipes:
             response = self.get_input_yes_no()
         return response
 
+    '''
+        This function validates total_data. if it is None, There will be issue with the applicationto access url
+        if total_data is empty_list then user entered incorrect ingredients so we till him to enter properly again
+        @param total_data {Object} - complete Json response object with all the recipes details
+    '''
     def check_total_data_response(self, total_data):
         if total_data is None:
             print("We're so sorry, something went wrong. Please check later.")
@@ -70,6 +105,11 @@ class Recipes:
             print("There are no recipe with this ingredient. Please use proper ingredients: ex: apple, banana, etc")
             return self.get_recipes()
 
+    '''This function show the user a recipe that contains some of the supplied ingredients. If the user likes the 
+    recipe, it add the missing ingredients to a shopping list If the user does not like the recipe, it give the user a new 
+    recipe. It Repeat the process of showing new recipes to the user and adding the missing ingredients of “liked” 
+    recipes until the user is satisfied with their shopping list and shows the shopping list at the end.
+    @param total_data {Object} - complete Json response object with all the recipes details. '''
     def validate_data_and_add_items_to_shopping_cart(self, total_data):
         if total_data:
             shopping_list = []
@@ -109,6 +149,8 @@ class Recipes:
         else:
             self.check_total_data_response(total_data)
 
+    '''This function first let user type the ingredients and then use this data to get the recipe details and perform 
+    all the main app logic and show the shopping list details to the user '''
     def get_recipes(self):
         ingredients = self.get_ingredients()
         total_data = self.req.get_requests(ingredients, number=check_and_assign_ingredient_number())

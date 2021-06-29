@@ -1,3 +1,11 @@
+"""
+take ingredients and shows used ingredients if the action is used
+take ingredients and show missed ingredients, aisle, amount if the action is missed
+@param ingredients {Object} - Object with either used or missed ingredient details
+@param action {String} - used or missed
+@param ingredient_object {Object} - empty list to store the ingredient details
+@param print_message {String} - Message to show what action that is currently being performed
+"""
 def show_recipes(ingredients, action, ingredient_object, print_message):
     print_statement = []
     for i, ingredient in enumerate(ingredients):
@@ -24,6 +32,15 @@ def show_recipes(ingredients, action, ingredient_object, print_message):
     return ingredient_object
 
 
+"""
+find recipe object by index, parse it and return the used, missed and title 
+@param total_data {Object} - complete Json response object with all the recipes details
+@param i {Integer} - index to get the recipe
+
+@param used_object {Object} - Used ingredient details
+@param missed_object {Object} - Missing ingredient item details
+@param title {String} - Name of the recipe
+"""
 def show_one_recipe_by_index(total_data, i):
     used_object, missed_object, title = None, None, None
     if total_data and 0 <= i < len(total_data):
